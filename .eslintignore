@@ -1,0 +1,5 @@
+node_modules
+# ignore all files in the public folder
+/public
+index.html
+
