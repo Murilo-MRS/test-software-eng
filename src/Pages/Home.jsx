@@ -1,13 +1,14 @@
 import React from 'react';
-import ButtonCustom from '../Components/Button';
+import { Grid } from '@mui/material';
+import SearchBar from '../Components/SearchBar';
+import ProductList from '../Components/ProductList';
 
 function Home() {
   return (
-    <div>
-      <ButtonCustom>
-        Click
-      </ButtonCustom>
-    </div>
+    <Grid container>
+      <SearchBar />
+      <ProductList />
+    </Grid>
   );
 }
 export default Home;
