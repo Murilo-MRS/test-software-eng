@@ -4,17 +4,18 @@ import {
 } from '@mui/material';
 import React from 'react';
 
-function ProductCard({ title, thumbnail }) {
+function ProductCard({ title }) {
   return (
-    <Card sx={{ maxWidth: 345 }}>
+    <Card variant="outlined" sx={{ width: 345 }}>
       <CardMedia
-        sx={{ height: 140 }}
-        image={thumbnail}
+        component="img"
+        sx={{ height: 120 }}
+        image="https://dummyimage.com/360x180"
         title={title}
       />
       <CardContent>
         <Typography gutterBottom variant="h5" component="div">
-          Lizard
+          {title}
         </Typography>
       </CardContent>
       <CardActions>
