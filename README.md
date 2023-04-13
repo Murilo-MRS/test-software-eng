@@ -20,7 +20,6 @@ npm run dev
 ```
 
 Inicia o servidor de desenvolvimento local em `http://localhost:5173`.
-
 A página será recarregada automaticamente se você fizer edições.
 
 ```bash
