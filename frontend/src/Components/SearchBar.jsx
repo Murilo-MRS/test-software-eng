@@ -3,12 +3,20 @@ import {
   FormControl,
   Grid, InputLabel, MenuItem, Select, TextField,
 } from '@mui/material';
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
+import Context from '../context/Context';
 
 function SearchBar() {
+  const { setFilter, setSearch } = useContext(Context);
+
   const [site, setSite] = useState('');
   const [category, setCategory] = useState('');
-  const [search, setSearch] = useState('');
+  const [searchTerm, setSearchTerm] = useState('');
+
+  const handleSearch = () => {
+    setFilter({ category, webssite: site, searchTerm });
+    setSearch(true);
+  };
 
   return (
     <Grid
@@ -32,8 +40,8 @@ function SearchBar() {
             autoWidth
           >
             <MenuItem value="TODAS">Todas</MenuItem>
-            <MenuItem value="MLB">Mercado Livre Brasil</MenuItem>
-            <MenuItem value="MLA">Mercado Livre Argentina</MenuItem>
+            <MenuItem value="mercadolivre">Mercado Livre Brasil</MenuItem>
+            <MenuItem value="buscape">Buscape</MenuItem>
           </Select>
         </FormControl>
       </Grid>
@@ -49,9 +57,9 @@ function SearchBar() {
             defaultValue=""
             autoWidth
           >
-            <MenuItem value={10}>Geladeira</MenuItem>
-            <MenuItem value={20}>TV</MenuItem>
-            <MenuItem value={30}>Celular</MenuItem>
+            <MenuItem value="geladeira">Geladeira</MenuItem>
+            <MenuItem value="tv">TV</MenuItem>
+            <MenuItem value="celular">Celular</MenuItem>
           </Select>
         </FormControl>
       </Grid>
@@ -61,14 +69,20 @@ function SearchBar() {
             id="outlined-basic"
             label="Outlined"
             variant="outlined"
-            value={search}
-            onChange={({ target }) => setSearch(target.value)}
+            value={searchTerm}
+            onChange={({ target }) => setSearchTerm(target.value)}
           />
         </FormControl>
       </Grid>
       <Grid item xs={3}>
         <FormControl fullWidth size="large">
-          <Button variant="contained" color="primary">Search</Button>
+          <Button
+            variant="contained"
+            color="primary"
+            onClick={handleSearch}
+          >
+            Search
+          </Button>
         </FormControl>
       </Grid>
     </Grid>
