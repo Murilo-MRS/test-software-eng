@@ -4,18 +4,24 @@ import {
 } from '@mui/material';
 import React from 'react';
 
-function ProductCard({ title }) {
+function ProductCard({ photo, description, price }) {
   return (
     <Card variant="outlined" sx={{ width: 345 }}>
       <CardMedia
         component="img"
-        sx={{ height: 120 }}
-        image="https://dummyimage.com/360x180"
-        title={title}
+        sx={{ height: 240 }}
+        image={photo?.includes('gif') ? 'https://dummyimage.com/360x180' : photo}
+        title={description}
       />
       <CardContent>
         <Typography gutterBottom variant="h5" component="div">
-          {title}
+          {description}
+        </Typography>
+      </CardContent>
+      <CardContent>
+        <Typography gutterBottom variant="h3" component="div">
+          $
+          {price}
         </Typography>
       </CardContent>
       <CardActions>
@@ -26,8 +32,9 @@ function ProductCard({ title }) {
 }
 
 ProductCard.propTypes = {
-  thumbnail: PropTypes.string,
-  title: PropTypes.string,
+  photo: PropTypes.string,
+  description: PropTypes.string,
+  price: PropTypes.string,
 }.isRequired;
 
 export default ProductCard;
