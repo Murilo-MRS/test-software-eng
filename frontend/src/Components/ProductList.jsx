@@ -1,24 +1,10 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { Grid } from '@mui/material';
 import ProductCard from './ProductCard';
-// import Context from '../context/Context';
+import Context from '../context/Context';
 
 function ProductList() {
-  // const { data } = useContext(Context);
-  const data = [
-    { title: 'Televisão' },
-    { title: 'Celular' },
-    { title: 'Geladeira' },
-    { title: 'Fogão' },
-    { title: 'Microondas' },
-    { title: 'Notebook' },
-    { title: 'HD externo' },
-    { title: 'Placa de vídeo' },
-    { title: 'Ar Condicionado' },
-    { title: 'Freezer' },
-    { title: 'Cook Top' },
-    { title: 'Roupas' },
-  ];
+  const { data } = useContext(Context);
   return (
     <Grid
       container
@@ -33,8 +19,13 @@ function ProductList() {
           <Grid
             item
             xs={3}
+            key={product.id}
           >
-            <ProductCard key={product.title} props={product} />
+            <ProductCard
+              photo={product.photo}
+              description={product.description}
+              price={product.price}
+            />
           </Grid>
 
         ))

@@ -1,27 +1,61 @@
 import PropTypes from 'prop-types';
-import React, { useEffect, useMemo } from 'react';
+import React, { useEffect, useMemo, useState } from 'react';
 import Context from '../Context';
-// import getRequest from '../../../utils/axios';
+import getRequest from '../../../utils/axios';
 
 function Provider({ children }) {
-  // const [data, setData] = useState([]);
-  // const [productList, setProductList] = useState([]);
-  // const fetchProducts = async () => {
-  //   const response = await getRequest('https://api.mercadolibre.com/sites/MLB/search?category=MLB5726&q=');
-  //   setData(response);
-  // };
+  const [site, setSite] = useState('');
+  const [category, setCategory] = useState('');
+  const [data, setData] = useState([]);
+  const [search, setSearch] = useState(false);
+  const [productList, setProductList] = useState([]);
+  const [filter, setFilter] = useState({ category: '', webssite: '', searchTerm: '' });
+
+  const fetchProducts = async (categoryFilter, siteFilter, searchFilter) => {
+    const response = await getRequest(`http://localhost:3001/products/database?website=${siteFilter}`);
+    const filterResponse = response
+      ?.filter((product) => product?.description
+        .toLowerCase().includes(searchFilter?.toLowerCase()))
+      .filter((product) => product?.category === categoryFilter);
+    return setData(filterResponse);
+  };
+
   useEffect(() => {
-    // setData();
-    // setData([...getRequest('https://api.mercadolibre.com/sites/MLB/search?category=MLB5726&q=')]);
+    const fetchCategories = async () => {
+      const responseMobile = await getRequest('http://localhost:3001/products?q=celular');
+      const responseTv = await getRequest('http://localhost:3001/products?q=tv');
+      const responseRefrigerator = await getRequest('http://localhost:3001/products?q=geladeira');
+      setData([...responseMobile, ...responseTv, ...responseRefrigerator]);
+    };
+    fetchCategories();
   }, []);
+
+  useEffect(() => {
+    if (search) {
+      fetchProducts(filter?.category, filter?.webssite, filter?.searchTerm);
+
+      setSearch(false);
+    }
+  }, [search]);
 
   const contextValue = useMemo(
     () => (
       {
-
+        site,
+        setSite,
+        category,
+        setCategory,
+        search,
+        setSearch,
+        data,
+        setData,
+        productList,
+        setProductList,
+        filter,
+        setFilter,
       }
     ),
-    [],
+    [data, search],
   );
 
   return (
