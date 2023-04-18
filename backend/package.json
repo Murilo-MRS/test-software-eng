@@ -2,15 +2,15 @@
   "name": "nodejs-ts-boilerplate",
   "version": "1.0.0",
   "description": "",
-  "main": "src/server.ts",
+  "main": "build/server.js",
   "scripts": {
-    "start": "npm run build && node build/src/server.ts",
+    "prestart": "npm run build && npm run db:reset",
+    "start": "npm run build &&  node ./build/server.js",
     "build": "npx -y tsc",
     "dev": "tsnd src/server.ts",
     "test:mocha": "mocha -r ts-node/register tests/**/**/*.test.ts --exit -t 60000",
     "test:coverage": "nyc mocha -r ts-node/register tests/**/**/*.test.ts --exit -t 60000",
-    "db:reset": "npx sequelize-cli db:drop && npx sequelize-cli db:create && npx sequelize-cli db:migrate",
-    "prestart": "npm run build && npm run db:reset"
+    "db:reset": "npx sequelize-cli db:drop && npx sequelize-cli db:create && npx sequelize-cli db:migrate"
   },
   "repository": {
     "type": "git",

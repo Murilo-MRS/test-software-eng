@@ -4,6 +4,7 @@
     "rootDir": "./src",
     "target": "es2019",
     "module": "commonjs",
+    "moduleResolution": "node",
     "typeRoots": [
       "src/@types",
       "./node_modules/@types"
