@@ -1,4 +1,3 @@
-import 'dotenv/config';
 import PropTypes from 'prop-types';
 import React, { useEffect, useMemo, useState } from 'react';
 import Context from '../Context';
@@ -12,7 +11,7 @@ function Provider({ children }) {
   const [productList, setProductList] = useState([]);
   const [filter, setFilter] = useState({ category: '', webssite: '', searchTerm: '' });
 
-  const ENDPOINT = process.env.ENDPOINT || 'http://localhost:3001';
+  const ENDPOINT = process.env.REACT_APP_ENDPOINT || 'http://localhost:3001';
 
   const fetchProducts = async (categoryFilter, siteFilter, searchFilter) => {
     const response = await getRequest(`${ENDPOINT}/products/database?website=${siteFilter}`);
