@@ -12,8 +12,10 @@ function Provider({ children }) {
   const [productList, setProductList] = useState([]);
   const [filter, setFilter] = useState({ category: '', webssite: '', searchTerm: '' });
 
+  const ENDPOINT = process.env.ENDPOINT || 'http://localhost:3001';
+
   const fetchProducts = async (categoryFilter, siteFilter, searchFilter) => {
-    const response = await getRequest(`${process.env.ENDPOINT}/products/database?website=${siteFilter}`);
+    const response = await getRequest(`${ENDPOINT}/products/database?website=${siteFilter}`);
     const filterResponse = response
       ?.filter((product) => product?.description
         .toLowerCase().includes(searchFilter?.toLowerCase()))

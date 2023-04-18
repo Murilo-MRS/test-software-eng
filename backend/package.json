@@ -2,10 +2,10 @@
   "name": "nodejs-ts-boilerplate",
   "version": "1.0.0",
   "description": "",
-  "main": "build/server.js",
+  "main": "./build/server.js",
   "scripts": {
     "prestart": "npm run build && npm run db:reset",
-    "start": "npm run build &&  node ./build/server.js",
+    "start": "npm run build &&  node .",
     "build": "npx -y tsc",
     "dev": "tsnd src/server.ts",
     "test:mocha": "mocha -r ts-node/register tests/**/**/*.test.ts --exit -t 60000",
