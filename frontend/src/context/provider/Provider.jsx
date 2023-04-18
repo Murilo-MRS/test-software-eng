@@ -1,3 +1,4 @@
+import 'dotenv/config';
 import PropTypes from 'prop-types';
 import React, { useEffect, useMemo, useState } from 'react';
 import Context from '../Context';
@@ -12,7 +13,7 @@ function Provider({ children }) {
   const [filter, setFilter] = useState({ category: '', webssite: '', searchTerm: '' });
 
   const fetchProducts = async (categoryFilter, siteFilter, searchFilter) => {
-    const response = await getRequest(`http://localhost:3001/products/database?website=${siteFilter}`);
+    const response = await getRequest(`${process.env.ENDPOINT}/products/database?website=${siteFilter}`);
     const filterResponse = response
       ?.filter((product) => product?.description
         .toLowerCase().includes(searchFilter?.toLowerCase()))
