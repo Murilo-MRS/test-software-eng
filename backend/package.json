@@ -2,7 +2,7 @@
   "name": "nodejs-ts-boilerplate",
   "version": "1.0.0",
   "description": "",
-  "main": "build/server.js",
+  "main": "./src/server.ts",
   "scripts": {
     "prestart": "npm run build && npm run db:reset",
     "start": "npm run build &&  node ./build/server.js",

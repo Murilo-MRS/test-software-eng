@@ -1,4 +1,3 @@
-import 'dotenv/config';
 import PropTypes from 'prop-types';
 import React, { useEffect, useMemo, useState } from 'react';
 import Context from '../Context';
@@ -13,7 +12,7 @@ function Provider({ children }) {
   const [filter, setFilter] = useState({ category: '', webssite: '', searchTerm: '' });
 
   const fetchProducts = async (categoryFilter, siteFilter, searchFilter) => {
-    const response = await getRequest(`${process.env.ENDPOINT}/products/database?website=${siteFilter}`);
+    const response = await getRequest(`/products/database?website=${siteFilter}`);
     const filterResponse = response
       ?.filter((product) => product?.description
         .toLowerCase().includes(searchFilter?.toLowerCase()))
@@ -23,9 +22,9 @@ function Provider({ children }) {
 
   useEffect(() => {
     const fetchCategories = async () => {
-      const responseMobile = await getRequest('http://localhost:3001/products?q=celular');
-      const responseTv = await getRequest('http://localhost:3001/products?q=tv');
-      const responseRefrigerator = await getRequest('http://localhost:3001/products?q=geladeira');
+      const responseMobile = await getRequest('/products?q=celular');
+      const responseTv = await getRequest('/products?q=tv');
+      const responseRefrigerator = await getRequest('/products?q=geladeira');
       setData([...responseMobile, ...responseTv, ...responseRefrigerator]);
     };
     fetchCategories();
