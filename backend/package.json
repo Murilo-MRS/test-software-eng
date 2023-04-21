@@ -4,7 +4,6 @@
   "description": "",
   "main": "./src/server.ts",
   "scripts": {
-    "prestart": "npm run build && npm run db:reset",
     "start": "npm run build &&  node ./build/server.js",
     "build": "npx -y tsc",
     "dev": "tsnd src/server.ts",

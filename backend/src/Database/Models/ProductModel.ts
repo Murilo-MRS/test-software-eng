@@ -45,5 +45,4 @@ Product.init({
   timestamps: false,
 });
 
-
 export default Product;
